@@ -3,14 +3,14 @@
 #if defined(MCUDRV_STM32) || defined(MCUDRV_APM32)
 #if defined(STM32F4xx) || defined(APM32F4xx)
 
-#include <ucanopen/stm32/f4/node/node.hpp>
-#include <ucanopen/stm32/f4/server/impl/impl_server.hpp>
-#include <ucanopen/stm32/f4/server/services/heartbeat_service/heartbeat_service.hpp>
-#include <ucanopen/stm32/f4/server/services/rpdo_service/rpdo_service.hpp>
-#include <ucanopen/stm32/f4/server/services/sdo_service/sdo_service.hpp>
-#include <ucanopen/stm32/f4/server/services/sync_service/sync_service.hpp>
-#include <ucanopen/stm32/f4/server/services/tpdo_service/tpdo_service.hpp>
-#include <ucanopen/stm32/f4/ucanopen_def.hpp>
+#include <ucanopen-arm/f4/node/node.hpp>
+#include <ucanopen-arm/f4/server/impl/impl_server.hpp>
+#include <ucanopen-arm/f4/server/services/heartbeat_service/heartbeat_service.hpp>
+#include <ucanopen-arm/f4/server/services/rpdo_service/rpdo_service.hpp>
+#include <ucanopen-arm/f4/server/services/sdo_service/sdo_service.hpp>
+#include <ucanopen-arm/f4/server/services/sync_service/sync_service.hpp>
+#include <ucanopen-arm/f4/server/services/tpdo_service/tpdo_service.hpp>
+#include <ucanopen-arm/f4/ucanopen_def.hpp>
 
 #include <vector>
 

@@ -7,9 +7,10 @@
 #include <cstddef>
 #include <cstdint>
 #include <cstring>
-#include <mcudrv/generic/can.hpp>
 #include <optional>
 #include <utility>
+
+#include <emblib/can.hpp>
 
 namespace ucanopen {
 

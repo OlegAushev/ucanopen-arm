@@ -1,16 +1,14 @@
 #if defined(MCUDRV_STM32) || defined(MCUDRV_APM32)
 #if defined(STM32F4xx) || defined(APM32F4xx)
 
-#include <ucanopen/stm32/f4/server/server.hpp>
+#include <ucanopen-arm/f4/server/server.hpp>
 
 namespace ucanopen {
 
 Server::Server(ucan::Module& can_module,
                const ServerConfig& config,
                std::vector<ODEntry>& object_dictionary)
-        : impl::Server(can_module,
-                       NodeId(config.node_id),
-                       object_dictionary),
+        : impl::Server(can_module, NodeId(config.node_id), object_dictionary),
           emb::singleton_array<Server, ucan::peripheral_count>(
                   this, std::to_underlying(can_module.peripheral())) {
     heartbeat_service = new HeartbeatService(

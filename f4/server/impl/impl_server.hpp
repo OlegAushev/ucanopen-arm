@@ -3,12 +3,12 @@
 #if defined(MCUDRV_STM32) || defined(MCUDRV_APM32)
 #if defined(STM32F4xx) || defined(APM32F4xx)
 
-#include <ucanopen/stm32/f4/ucanopen_def.hpp>
+#include <ucanopen-arm/f4/ucanopen_def.hpp>
 #if defined(MCUDRV_STM32)
 #include <mcudrv/stm32/f4/can/can.h>
 namespace ucan = mcu::stm32::can;
 #elif defined(MCUDRV_APM32)
-#include <mcudrv/apm32/f4/can/can.hpp>
+#include <mcudrv-apm32/f4/can/can.hpp>
 namespace ucan = mcu::apm32::can;
 #endif
 #include <algorithm>
@@ -52,9 +52,8 @@ private:
     void init_object_dictionary();
 public:
     const ODEntry* find_od_entry(ODObjectKey key) {
-        auto res = std::equal_range(dictionary_.begin(),
-                                    dictionary_.end(),
-                                    key);
+        auto res =
+                std::equal_range(dictionary_.begin(), dictionary_.end(), key);
         if (res.first == res.second) {
             return nullptr;
         }
