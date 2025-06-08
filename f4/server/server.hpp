@@ -17,59 +17,59 @@
 namespace ucanopen {
 
 struct ServerConfig {
-    uint32_t node_id;
-    uint32_t heartbeat_period_ms; // 0 - is inactive
-    uint32_t sync_period_ms;      // 0 - is inactive
-    uint32_t tpdo1_period_ms;     // 0 - TPDO is inactive
-    uint32_t tpdo2_period_ms;
-    uint32_t tpdo3_period_ms;
-    uint32_t tpdo4_period_ms;
-    uint32_t rpdo1_timeout_ms; // 0 - no RPDO timeout
-    uint32_t rpdo2_timeout_ms;
-    uint32_t rpdo3_timeout_ms;
-    uint32_t rpdo4_timeout_ms;
-    uint32_t rpdo1_id; // 0 - use default RPDO ID
-    uint32_t rpdo2_id;
-    uint32_t rpdo3_id;
-    uint32_t rpdo4_id;
+  uint32_t node_id;
+  uint32_t heartbeat_period_ms; // 0 - is inactive
+  uint32_t sync_period_ms;      // 0 - is inactive
+  uint32_t tpdo1_period_ms;     // 0 - TPDO is inactive
+  uint32_t tpdo2_period_ms;
+  uint32_t tpdo3_period_ms;
+  uint32_t tpdo4_period_ms;
+  uint32_t rpdo1_timeout_ms; // 0 - no RPDO timeout
+  uint32_t rpdo2_timeout_ms;
+  uint32_t rpdo3_timeout_ms;
+  uint32_t rpdo4_timeout_ms;
+  uint32_t rpdo1_id; // 0 - use default RPDO ID
+  uint32_t rpdo2_id;
+  uint32_t rpdo3_id;
+  uint32_t rpdo4_id;
 };
 
 class Server : public impl::Server,
-               public emb::singleton_array<Server, ucan::peripheral_count> {
+               public emb::singleton_array<Server, ucan::periph_num> {
 protected:
-    HeartbeatService* heartbeat_service;
-    SyncService* sync_service;
-    TpdoService* tpdo_service;
-    RpdoService* rpdo_service;
-    SdoService* sdo_service;
+  HeartbeatService* heartbeat_service;
+  SyncService* sync_service;
+  TpdoService* tpdo_service;
+  RpdoService* rpdo_service;
+  SdoService* sdo_service;
 
-    std::vector<Node*> nodes;
+  std::vector<Node*> nodes;
 
-    std::vector<std::pair<ucan::RxMessageAttribute, impl::FrameReceiver*>>
-            rxattr_map_;
+  std::vector<std::pair<ucan::RxMessageAttribute, impl::FrameReceiver*>>
+      rxattr_map_;
 
-    virtual void inspect() {}
+  virtual void inspect() {}
 public:
-    Server(ucan::Module& can_module,
-           const ServerConfig& config,
-           std::vector<ODEntry>& object_dictionary);
+  Server(ucan::Module& can_module,
+         ServerConfig const& config,
+         std::vector<ODEntry>& object_dictionary);
 
-    virtual ~Server() = default;
+  virtual ~Server() = default;
 
-    static Server* instance(ucan::Peripheral peripheral) {
-        return emb::singleton_array<Server, ucan::peripheral_count>::instance(
-                std::to_underlying(peripheral));
-    }
+  static Server* instance(ucan::Peripheral peripheral) {
+    return emb::singleton_array<Server, ucan::periph_num>::instance(
+        std::to_underlying(peripheral));
+  }
 
-    void add_node(Node* node_);
+  void add_node(Node* node_);
 
-    void start();
-    void stop();
-    void run();
+  void start();
+  void stop();
+  void run();
 public:
-    void on_frame_received(ucan::Module& can_module,
-                           const ucan::RxMessageAttribute& attr,
-                           const can_frame& frame);
+  void on_frame_received(ucan::Module& can_module,
+                         ucan::RxMessageAttribute const& attr,
+                         can_frame const& frame);
 };
 
 } // namespace ucanopen
