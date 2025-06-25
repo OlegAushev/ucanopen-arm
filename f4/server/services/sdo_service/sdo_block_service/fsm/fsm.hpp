@@ -15,52 +15,59 @@ namespace blk_fsm {
 
 constexpr size_t state_count = 3;
 enum class State : unsigned int {
-    idle,
-    download,
-    download_end,
+  idle,
+  download,
+  download_end,
 };
 
 class AbstractState : public emb::fsm::abstract_state<SdoBlockService, State> {
 protected:
-    AbstractState(State id)
-            : emb::fsm::abstract_state<SdoBlockService, State>(id) {}
+  AbstractState(State id)
+      : emb::fsm::abstract_state<SdoBlockService, State>(id) {}
 public:
-    static AbstractState* create(State state);
-    static void destroy(State state, AbstractState* stateobj);
-    virtual ~AbstractState() {}
+  static AbstractState* create(State state);
+  static void destroy(State state, AbstractState* stateobj);
 
-    virtual void handle(SdoBlockService* _service,
-                        const canpayload_t& payload) = 0;
+  virtual ~AbstractState() {}
+
+  virtual void handle(SdoBlockService* _service,
+                      canpayload_t const& payload) = 0;
 };
 
 class IdleState final : public AbstractState {
 protected:
-    virtual void initiate(SdoBlockService* _service) override {}
-    virtual void finalize(SdoBlockService* _service) override {}
+  virtual void initiate(SdoBlockService* _service, State prev_state) override {}
+
+  virtual void finalize(SdoBlockService* _service, State next_state) override {}
 public:
-    IdleState() : AbstractState(State::idle) {}
-    virtual void handle(SdoBlockService* _service,
-                        const canpayload_t& payload) override;
+  IdleState() : AbstractState(State::idle) {}
+
+  virtual void handle(SdoBlockService* _service,
+                      canpayload_t const& payload) override;
 };
 
 class DownloadState final : public AbstractState {
 protected:
-    virtual void initiate(SdoBlockService* _service) override {}
-    virtual void finalize(SdoBlockService* _service) override {}
+  virtual void initiate(SdoBlockService* _service, State prev_state) override {}
+
+  virtual void finalize(SdoBlockService* _service, State next_state) override {}
 public:
-    DownloadState() : AbstractState(State::download) {}
-    virtual void handle(SdoBlockService* _service,
-                        const canpayload_t& payload) override;
+  DownloadState() : AbstractState(State::download) {}
+
+  virtual void handle(SdoBlockService* _service,
+                      canpayload_t const& payload) override;
 };
 
 class DownloadEndState final : public AbstractState {
 protected:
-    virtual void initiate(SdoBlockService* _service) override {}
-    virtual void finalize(SdoBlockService* _service) override {}
+  virtual void initiate(SdoBlockService* _service, State prev_state) override {}
+
+  virtual void finalize(SdoBlockService* _service, State next_state) override {}
 public:
-    DownloadEndState() : AbstractState(State::download_end) {}
-    virtual void handle(SdoBlockService* _service,
-                        const canpayload_t& payload) override;
+  DownloadEndState() : AbstractState(State::download_end) {}
+
+  virtual void handle(SdoBlockService* _service,
+                      canpayload_t const& payload) override;
 };
 
 } // namespace blk_fsm

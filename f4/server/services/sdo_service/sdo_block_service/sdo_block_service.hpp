@@ -16,22 +16,21 @@ using PayloadBlock = emb::static_vector<canpayload_t, 127>;
 
 class SdoBlockConsumer {
 public:
-    virtual void process(const PayloadBlock& block) = 0;
+  virtual void process(PayloadBlock const& block) = 0;
 };
 
 class SdoBlockService final
-        : public emb::fsm::abstract_object<blk_fsm::State,
-                                           blk_fsm::AbstractState,
-                                           blk_fsm::state_count> {
+    : public emb::fsm::abstract_object<blk_fsm::State,
+                                       blk_fsm::AbstractState,
+                                       blk_fsm::state_count> {
 private:
-    impl::Server& server_;
-    SdoBlockConsumer* consumer_{nullptr};
-    std::unique_ptr<PayloadBlock> block_;
+  impl::Server& server_;
+  SdoBlockConsumer* consumer_{nullptr};
+  std::unique_ptr<PayloadBlock> block_;
 public:
-    SdoBlockService(impl::Server& server);
-    void handle(const canpayload_t& payload) {
-        current_state_->handle(this, payload);
-    }
+  SdoBlockService(impl::Server& server);
+
+  void handle(canpayload_t const& payload) { state_->handle(this, payload); }
 };
 
 } // namespace ucanopen
