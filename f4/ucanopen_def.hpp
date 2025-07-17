@@ -11,6 +11,7 @@
 #include <utility>
 
 #include <emblib/can.hpp>
+#include <emblib/units.hpp>
 
 namespace ucanopen {
 
@@ -175,6 +176,16 @@ union ExpeditedSdoData {
   ExpeditedSdoData(uint32_t value) : u32(value) {}
 
   ExpeditedSdoData(float value) : f32(value) {}
+
+  template<typename Unit>
+  ExpeditedSdoData(emb::units::named_unit<float, Unit> value)
+      : f32(value.numval()) {}
+
+  template<typename T>
+    requires requires(T x) {
+      { x.numval() } -> std::same_as<float>;
+    }
+  ExpeditedSdoData(T value) : f32(value.numval()) {}
 };
 
 struct ExpeditedSdo {
