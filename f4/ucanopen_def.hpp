@@ -10,8 +10,8 @@
 #include <optional>
 #include <utility>
 
-#include <emblib/can.hpp>
-#include <emblib/units.hpp>
+#include <emb/can.hpp>
+#include <emb/units.hpp>
 
 namespace ucanopen {
 

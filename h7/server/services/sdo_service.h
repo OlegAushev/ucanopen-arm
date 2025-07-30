@@ -4,7 +4,7 @@
 #ifdef STM32H7xx
 
 #include "../impl/impl_server.h"
-#include <emblib/algorithm.hpp>
+#include <emb/algorithm.hpp>
 #include <mcudrv/stm32/h7/chrono/chrono.h>
 
 namespace ucanopen {

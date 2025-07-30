@@ -7,7 +7,7 @@
 #include <ucanopen-arm/f4/server/services/sdo_service/sdo_block_service/fsm/fsm.hpp>
 #include <ucanopen-arm/f4/server/services/sdo_service/sdo_block_service/sdo_block_service_def.hpp>
 
-#include <emblib/static_vector.hpp>
+#include <emb/static_vector.hpp>
 #include <memory>
 
 namespace ucanopen {

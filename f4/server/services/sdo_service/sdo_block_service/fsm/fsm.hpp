@@ -5,7 +5,7 @@
 
 #include <ucanopen-arm/f4/server/services/sdo_service/sdo_block_service/sdo_block_service_def.hpp>
 
-#include <emblib/fsm.hpp>
+#include <emb/fsm.hpp>
 
 namespace ucanopen {
 

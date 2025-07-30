@@ -7,7 +7,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <cstring>
-#include <emblib/interfaces/can.h>
+#include <emb/interfaces/can.h>
 #include <optional>
 #include <utility>
 

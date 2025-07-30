@@ -12,7 +12,7 @@ namespace ucan = mcu::stm32::can;
 namespace ucan = mcu::apm32::can;
 #endif
 #include <algorithm>
-#include <emblib/algorithm.hpp>
+#include <emb/algorithm.hpp>
 #include <vector>
 
 namespace ucanopen {
