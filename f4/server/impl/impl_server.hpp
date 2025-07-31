@@ -8,7 +8,7 @@
 #include <mcudrv/stm32/f4/can/can.h>
 namespace ucan = mcu::stm32::can;
 #elif defined(MCUDRV_APM32)
-#include <mcudrv-apm32/f4/can/can.hpp>
+#include <mcu/apm32/f4/can.hpp>
 namespace ucan = mcu::apm32::can;
 #endif
 #include <algorithm>
