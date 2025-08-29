@@ -1,6 +1,3 @@
-#if defined(MCUDRV_STM32) || defined(MCUDRV_APM32)
-#if defined(STM32F4xx) || defined(APM32F4xx)
-
 #include <ucanopen-arm/f4/server/services/heartbeat_service/heartbeat_service.hpp>
 
 namespace ucanopen {
@@ -27,6 +24,3 @@ void HeartbeatService::send() {
 }
 
 } // namespace ucanopen
-
-#endif
-#endif

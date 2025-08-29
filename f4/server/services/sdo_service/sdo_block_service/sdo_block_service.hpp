@@ -1,8 +1,5 @@
 #pragma once
 
-#if defined(MCUDRV_STM32) || defined(MCUDRV_APM32)
-#if defined(STM32F4xx) || defined(APM32F4xx)
-
 #include <ucanopen-arm/f4/server/impl/impl_server.hpp>
 #include <ucanopen-arm/f4/server/services/sdo_service/sdo_block_service/fsm/fsm.hpp>
 #include <ucanopen-arm/f4/server/services/sdo_service/sdo_block_service/sdo_block_service_def.hpp>
@@ -34,6 +31,3 @@ public:
 };
 
 } // namespace ucanopen
-
-#endif
-#endif

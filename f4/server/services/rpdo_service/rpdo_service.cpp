@@ -1,6 +1,3 @@
-#if defined(MCUDRV_STM32) || defined(MCUDRV_APM32)
-#if defined(STM32F4xx) || defined(APM32F4xx)
-
 #include <ucanopen-arm/f4/server/services/rpdo_service/rpdo_service.hpp>
 
 namespace ucanopen {
@@ -32,7 +29,7 @@ void RpdoService::register_rpdo(CobRpdo rpdo,
                               .FilterScale = CAN_FILTERSCALE_32BIT,
                               .FilterActivation = {},
                               .SlaveStartFilterBank = {}};
-#elif defined(MCUDRV_APM32)
+#elif defined(APM32F4XX)
   CAN_FilterConfig_T filter = {.filterNumber{},
                                .filterIdHigh = uint16_t(uint16_t(id) << 5),
                                .filterIdLow = 0,
@@ -91,6 +88,3 @@ void RpdoService::handle() {
 }
 
 } // namespace ucanopen
-
-#endif
-#endif

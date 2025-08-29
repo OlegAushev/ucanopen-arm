@@ -1,8 +1,5 @@
 #pragma once
 
-#if defined(MCUDRV_STM32) || defined(MCUDRV_APM32)
-#if defined(STM32F4xx) || defined(APM32F4xx)
-
 #include <ucanopen-arm/f4/server/impl/impl_server.hpp>
 
 #include <emb/chrono.hpp>
@@ -42,7 +39,7 @@ public:
   void register_rx_message(CAN_FilterTypeDef& filter,
                            std::chrono::milliseconds timeout,
                            void (*handler)(const canpayload_t&));
-#elif defined(MCUDRV_APM32)
+#elif defined(APM32F4XX)
   void register_rx_message(CAN_FilterConfig_T& filter,
                            std::chrono::milliseconds timeout,
                            void (*handler)(const canpayload_t&));
@@ -65,6 +62,3 @@ public:
 };
 
 } // namespace ucanopen
-
-#endif
-#endif

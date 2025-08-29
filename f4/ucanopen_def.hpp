@@ -1,8 +1,5 @@
 #pragma once
 
-#if defined(MCUDRV_STM32) || defined(MCUDRV_APM32)
-#if defined(STM32F4xx) || defined(APM32F4xx)
-
 #include <array>
 #include <cstddef>
 #include <cstdint>
@@ -355,6 +352,3 @@ inline bool operator==(ODObjectKey const& lhs, ODObjectKey const& rhs) {
 }
 
 } // namespace ucanopen
-
-#endif
-#endif

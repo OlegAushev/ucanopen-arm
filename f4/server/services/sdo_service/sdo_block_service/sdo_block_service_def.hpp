@@ -1,8 +1,5 @@
 #pragma once
 
-#if defined(MCUDRV_STM32) || defined(MCUDRV_APM32)
-#if defined(STM32F4xx) || defined(APM32F4xx)
-
 #include <ucanopen-arm/f4/ucanopen_def.hpp>
 
 namespace ucanopen {
@@ -100,6 +97,3 @@ struct ServerEndResponseSdo {
 namespace blk_read {} // namespace blk_read
 
 } // namespace ucanopen
-
-#endif
-#endif

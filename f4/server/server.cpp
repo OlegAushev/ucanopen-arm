@@ -1,6 +1,3 @@
-#if defined(MCUDRV_STM32) || defined(MCUDRV_APM32)
-#if defined(STM32F4xx) || defined(APM32F4xx)
-
 #include <ucanopen-arm/f4/server/server.hpp>
 
 namespace ucanopen {
@@ -26,7 +23,7 @@ Server::Server(ucan::Module& can_module,
   can_module.init_interrupts(CAN_IT_RX_FIFO0_MSG_PENDING |
                              CAN_IT_RX_FIFO1_MSG_PENDING |
                              CAN_IT_TX_MAILBOX_EMPTY);
-#elif defined(MCUDRV_APM32)
+#elif defined(APM32F4XX)
   can_module.init_interrupts(CAN_INT_F0MP | CAN_INT_F1MP | CAN_INT_TXME);
 #endif
 
@@ -94,6 +91,3 @@ void Server::on_frame_received(ucan::Module& can_module,
 }
 
 } // namespace ucanopen
-
-#endif
-#endif

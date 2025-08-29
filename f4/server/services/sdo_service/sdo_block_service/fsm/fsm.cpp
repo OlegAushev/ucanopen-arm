@@ -1,6 +1,3 @@
-#if defined(MCUDRV_STM32) || defined(MCUDRV_APM32)
-#if defined(STM32F4xx) || defined(APM32F4xx)
-
 #include <ucanopen-arm/f4/server/services/sdo_service/sdo_block_service/fsm/fsm.hpp>
 
 namespace ucanopen {
@@ -33,6 +30,3 @@ void DownloadEndState::handle(SdoBlockService* _service,
 
 } // namespace blk_fsm
 } // namespace ucanopen
-
-#endif
-#endif

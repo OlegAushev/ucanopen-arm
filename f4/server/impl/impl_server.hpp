@@ -1,13 +1,10 @@
 #pragma once
 
-#if defined(MCUDRV_STM32) || defined(MCUDRV_APM32)
-#if defined(STM32F4xx) || defined(APM32F4xx)
-
 #include <ucanopen-arm/f4/ucanopen_def.hpp>
 #if defined(MCUDRV_STM32)
 #include <mcudrv/stm32/f4/can/can.h>
 namespace ucan = mcu::stm32::can;
-#elif defined(MCUDRV_APM32)
+#elif defined(APM32F4XX)
 #include <mcu/apm32/f4/can.hpp>
 namespace ucan = mcu::apm32::can;
 #endif
@@ -71,6 +68,3 @@ public:
 
 } // namespace impl
 } // namespace ucanopen
-
-#endif
-#endif

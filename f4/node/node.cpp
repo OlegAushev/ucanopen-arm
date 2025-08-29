@@ -1,6 +1,3 @@
-#if defined(MCUDRV_STM32) || defined(MCUDRV_APM32)
-#if defined(STM32F4xx) || defined(APM32F4xx)
-
 #include <ucanopen-arm/f4/node/node.hpp>
 #include <ucanopen-arm/f4/server/server.hpp>
 
@@ -14,7 +11,7 @@ Node::Node(Server& server) : can_module_(server.can_module_) {
 void Node::register_rx_message(CAN_FilterTypeDef& filter,
                                std::chrono::milliseconds timeout,
                                void (*handler)(const canpayload_t&)) {
-#elif defined(MCUDRV_APM32)
+#elif defined(APM32F4XX)
 void Node::register_rx_message(CAN_FilterConfig_T& filter,
                                std::chrono::milliseconds timeout,
                                void (*handler)(const canpayload_t&)) {
@@ -101,6 +98,3 @@ bool Node::good() {
 }
 
 } // namespace ucanopen
-
-#endif
-#endif
