@@ -17,10 +17,11 @@ enum class State : unsigned int {
   download_end,
 };
 
-class AbstractState : public emb::fsm::abstract_state<SdoBlockService, State> {
+class AbstractState
+    : public emb::fsm::sp1::abstract_state<SdoBlockService, State> {
 protected:
   AbstractState(State id)
-      : emb::fsm::abstract_state<SdoBlockService, State>(id) {}
+      : emb::fsm::sp1::abstract_state<SdoBlockService, State>(id) {}
 public:
   static AbstractState* create(State state);
   static void destroy(State state, AbstractState* stateobj);

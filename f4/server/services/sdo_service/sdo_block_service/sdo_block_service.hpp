@@ -16,10 +16,10 @@ public:
   virtual void process(PayloadBlock const& block) = 0;
 };
 
-class SdoBlockService final
-    : public emb::fsm::abstract_object<blk_fsm::State,
-                                       blk_fsm::AbstractState,
-                                       blk_fsm::state_count> {
+class SdoBlockService final : public emb::fsm::sp1::abstract_object<
+                                  blk_fsm::State,
+                                  blk_fsm::AbstractState,
+                                  blk_fsm::state_count> {
 private:
   impl::Server& server_;
   SdoBlockConsumer* consumer_{nullptr};
