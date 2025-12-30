@@ -11,7 +11,7 @@ private:
   impl::Server& server_;
 
   struct Message {
-    ucan::RxMessageAttribute attr;
+    ucan::rxmessage_attr attr;
     std::chrono::milliseconds timeout;
     std::chrono::time_point<emb::chrono::steady_clock> timepoint;
     bool unhandled;
@@ -28,8 +28,8 @@ public:
                      void (*handler)(canpayload_t const&),
                      canid_t id = 0);
 
-  virtual std::vector<ucan::RxMessageAttribute> get_rx_attr() const override;
-  virtual void recv(ucan::RxMessageAttribute const& attr,
+  virtual std::vector<ucan::rxmessage_attr> get_rx_attr() const override;
+  virtual void recv(ucan::rxmessage_attr const& attr,
                     can_frame const& frame) override;
   virtual void handle() override;
 

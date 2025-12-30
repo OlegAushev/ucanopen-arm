@@ -34,11 +34,11 @@ SdoService::SdoService(impl::Server& server) : server_(server) {
   tsdo_id_ = calculate_cob_id(Cob::tsdo, server_.node_id());
 }
 
-std::vector<ucan::RxMessageAttribute> SdoService::get_rx_attr() const {
+std::vector<ucan::rxmessage_attr> SdoService::get_rx_attr() const {
   return {rsdo_rxattr_};
 }
 
-void SdoService::recv(ucan::RxMessageAttribute const& attr,
+void SdoService::recv(ucan::rxmessage_attr const& attr,
                       can_frame const& frame) {
   if (attr != rsdo_rxattr_) {
     return;

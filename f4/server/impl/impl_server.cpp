@@ -2,7 +2,7 @@
 
 namespace ucanopen {
 
-impl::Server::Server(ucan::Module& can_module,
+impl::Server::Server(ucan::peripheral& can_module,
                      NodeId node_id,
                      std::vector<ODEntry>& object_dictionary)
     : node_id_(node_id),

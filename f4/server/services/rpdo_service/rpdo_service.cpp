@@ -48,8 +48,8 @@ void RpdoService::register_rpdo(CobRpdo rpdo,
   messages_[idx].handler = handler;
 }
 
-std::vector<ucan::RxMessageAttribute> RpdoService::get_rx_attr() const {
-  std::vector<ucan::RxMessageAttribute> attributes;
+std::vector<ucan::rxmessage_attr> RpdoService::get_rx_attr() const {
+  std::vector<ucan::rxmessage_attr> attributes;
   for (auto const& msg : messages_) {
     if (msg.handler != nullptr) {
       attributes.push_back(msg.attr);
@@ -58,7 +58,7 @@ std::vector<ucan::RxMessageAttribute> RpdoService::get_rx_attr() const {
   return attributes;
 }
 
-void RpdoService::recv(ucan::RxMessageAttribute const& attr,
+void RpdoService::recv(ucan::rxmessage_attr const& attr,
                        can_frame const& frame) {
   auto msg_it =
       std::find_if(messages_.begin(),

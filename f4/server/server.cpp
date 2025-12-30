@@ -2,12 +2,12 @@
 
 namespace ucanopen {
 
-Server::Server(ucan::Module& can_module,
+Server::Server(ucan::peripheral& can_module,
                ServerConfig const& config,
                std::vector<ODEntry>& object_dictionary)
     : impl::Server(can_module, NodeId(config.node_id), object_dictionary),
-      emb::singleton_array<Server, ucan::periph_num>(
-          this, std::to_underlying(can_module.peripheral())) {
+      emb::singleton_array<Server, ucan::peripheral_count>(
+          this, std::to_underlying(can_module.id())) {
   heartbeat_service = new HeartbeatService(
       *this, std::chrono::milliseconds(config.heartbeat_period_ms));
   sync_service =
@@ -24,7 +24,7 @@ Server::Server(ucan::Module& can_module,
                              CAN_IT_RX_FIFO1_MSG_PENDING |
                              CAN_IT_TX_MAILBOX_EMPTY);
 #elif defined(APM32F4XX)
-  can_module.init_interrupts(CAN_INT_F0MP | CAN_INT_F1MP | CAN_INT_TXME);
+  can_module.configure_interrupts(CAN_INT_F0MP | CAN_INT_F1MP | CAN_INT_TXME);
 #endif
 
   nmt_state_ = NmtState::pre_operational;
@@ -78,8 +78,8 @@ void Server::run() {
   }
 }
 
-void Server::on_frame_received(ucan::Module& can_module,
-                               ucan::RxMessageAttribute const& attr,
+void Server::on_frame_received(ucan::peripheral& can_module,
+                               ucan::rxmessage_attr const& attr,
                                can_frame const& frame) {
   auto receiver =
       std::find_if(rxattr_map_.begin(),

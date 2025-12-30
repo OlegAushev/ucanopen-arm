@@ -9,6 +9,8 @@
 #include <ucanopen-arm/f4/server/services/tpdo_service/tpdo_service.hpp>
 #include <ucanopen-arm/f4/ucanopen_def.hpp>
 
+#include <emb/singleton.hpp>
+
 #include <vector>
 
 namespace ucanopen {
@@ -32,7 +34,7 @@ struct ServerConfig {
 };
 
 class Server : public impl::Server,
-               public emb::singleton_array<Server, ucan::periph_num> {
+               public emb::singleton_array<Server, ucan::peripheral_count> {
 protected:
   HeartbeatService* heartbeat_service;
   SyncService* sync_service;
@@ -42,19 +44,19 @@ protected:
 
   std::vector<Node*> nodes;
 
-  std::vector<std::pair<ucan::RxMessageAttribute, impl::FrameReceiver*>>
+  std::vector<std::pair<ucan::rxmessage_attr, impl::FrameReceiver*>>
       rxattr_map_;
 
   virtual void inspect() {}
 public:
-  Server(ucan::Module& can_module,
+  Server(ucan::peripheral& can_module,
          ServerConfig const& config,
          std::vector<ODEntry>& object_dictionary);
 
   virtual ~Server() = default;
 
-  static Server* instance(ucan::Peripheral peripheral) {
-    return emb::singleton_array<Server, ucan::periph_num>::instance(
+  static Server* instance(ucan::peripheral_id peripheral) {
+    return emb::singleton_array<Server, ucan::peripheral_count>::instance(
         std::to_underlying(peripheral));
   }
 
@@ -64,8 +66,8 @@ public:
   void stop();
   void run();
 public:
-  void on_frame_received(ucan::Module& can_module,
-                         ucan::RxMessageAttribute const& attr,
+  void on_frame_received(ucan::peripheral& can_module,
+                         ucan::rxmessage_attr const& attr,
                          can_frame const& frame);
 };
 

@@ -11,7 +11,7 @@ class SdoService : public impl::FrameReceiver {
 private:
   impl::Server& server_;
 
-  ucan::RxMessageAttribute rsdo_rxattr_;
+  ucan::rxmessage_attr rsdo_rxattr_;
   emb::queue<canpayload_t, 16> rsdo_queue_;
 
   canid_t tsdo_id_;
@@ -19,8 +19,8 @@ private:
   emb::queue<canpayload_t, 16> tsdo_queue_;
 public:
   SdoService(impl::Server& server);
-  virtual std::vector<ucan::RxMessageAttribute> get_rx_attr() const override;
-  virtual void recv(ucan::RxMessageAttribute const& attr,
+  virtual std::vector<ucan::rxmessage_attr> get_rx_attr() const override;
+  virtual void recv(ucan::rxmessage_attr const& attr,
                     can_frame const& frame) override;
   virtual void handle() override;
   void send();

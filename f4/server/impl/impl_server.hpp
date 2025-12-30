@@ -5,8 +5,8 @@
 #include <mcudrv/stm32/f4/can/can.h>
 namespace ucan = mcu::stm32::can;
 #elif defined(APM32F4XX)
-#include <mcu/apm32/f4/can.hpp>
-namespace ucan = mcu::apm32::can;
+#include <apm32/f4/can.hpp>
+namespace ucan = apm32::f4::can;
 #endif
 #include <algorithm>
 #include <emb/algorithm.hpp>
@@ -32,11 +32,11 @@ class Server {
   friend class ucanopen::Node;
 protected:
   NodeId node_id_;
-  ucan::Module& can_module_;
+  ucan::peripheral& can_module_;
   std::vector<ODEntry>& dictionary_;
   NmtState nmt_state_;
 public:
-  Server(ucan::Module& can_module,
+  Server(ucan::peripheral& can_module,
          NodeId node_id,
          std::vector<ODEntry>& object_dictionary);
 
@@ -61,8 +61,8 @@ public:
 
 class FrameReceiver {
 public:
-  virtual std::vector<ucan::RxMessageAttribute> get_rx_attr() const = 0;
-  virtual void recv(ucan::RxMessageAttribute const&, can_frame const&) = 0;
+  virtual std::vector<ucan::rxmessage_attr> get_rx_attr() const = 0;
+  virtual void recv(ucan::rxmessage_attr const&, can_frame const&) = 0;
   virtual void handle() = 0;
 };
 

@@ -52,15 +52,15 @@ void Node::send() {
   }
 }
 
-std::vector<ucan::RxMessageAttribute> Node::get_rx_attr() const {
-  std::vector<ucan::RxMessageAttribute> attributes;
+std::vector<ucan::rxmessage_attr> Node::get_rx_attr() const {
+  std::vector<ucan::rxmessage_attr> attributes;
   for (auto const& msg : rx_messages_) {
     attributes.push_back(msg.attr);
   }
   return attributes;
 }
 
-void Node::recv(ucan::RxMessageAttribute const& attr, can_frame const& frame) {
+void Node::recv(ucan::rxmessage_attr const& attr, can_frame const& frame) {
   auto received_msg =
       std::find_if(rx_messages_.begin(),
                    rx_messages_.end(),
