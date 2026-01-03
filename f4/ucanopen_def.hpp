@@ -176,13 +176,13 @@ union ExpeditedSdoData {
 
   template<typename Unit>
   ExpeditedSdoData(emb::units::named_unit<float, Unit> value)
-      : f32(value.numval()) {}
+      : f32(value.value()) {}
 
   template<typename T>
     requires requires(T x) {
-      { x.numval() } -> std::same_as<float>;
+      { x.value() } -> std::same_as<float>;
     }
-  ExpeditedSdoData(T value) : f32(value.numval()) {}
+  ExpeditedSdoData(T value) : f32(value.value()) {}
 };
 
 struct ExpeditedSdo {
