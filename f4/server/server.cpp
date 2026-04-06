@@ -24,7 +24,7 @@ Server::Server(ucan::peripheral& can_module,
                              CAN_IT_RX_FIFO1_MSG_PENDING |
                              CAN_IT_TX_MAILBOX_EMPTY);
 #elif defined(APM32F4XX)
-  can_module.configure_interrupts(CAN_INT_F0MP | CAN_INT_F1MP | CAN_INT_TXME);
+  can_module.configure_interrupts(CAN_INTEN_FMIEN0 | CAN_INTEN_FMIEN1 | CAN_INTEN_TXMEIEN);
 #endif
 
   nmt_state_ = NmtState::pre_operational;

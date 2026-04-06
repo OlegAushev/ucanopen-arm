@@ -30,15 +30,14 @@ void RpdoService::register_rpdo(CobRpdo rpdo,
                               .FilterActivation = {},
                               .SlaveStartFilterBank = {}};
 #elif defined(APM32F4XX)
-  CAN_FilterConfig_T filter = {.filterNumber{},
-                               .filterIdHigh = uint16_t(uint16_t(id) << 5),
-                               .filterIdLow = 0,
-                               .filterMaskIdHigh = 0x7FF << 5,
-                               .filterMaskIdLow = 0,
-                               .filterActivation{},
-                               .filterFIFO = CAN_FILTER_FIFO_0,
-                               .filterMode = CAN_FILTER_MODE_IDMASK,
-                               .filterScale = CAN_FILTER_SCALE_32BIT};
+  ucan::filter_config filter = {.filter_number = 0,
+                                .filter_id_high = uint32_t(uint16_t(id) << 5),
+                                .filter_id_low = 0,
+                                .filter_mask_id_high = 0x7FFu << 5,
+                                .filter_mask_id_low = 0,
+                                .fifo = ucan::rx_fifo::fifo0,
+                                .scale_32bit = true,
+                                .mode_id_list = false};
 #endif
 
   auto idx = std::to_underlying(rpdo);

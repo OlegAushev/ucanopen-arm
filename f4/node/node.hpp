@@ -40,7 +40,7 @@ public:
                            std::chrono::milliseconds timeout,
                            void (*handler)(const canpayload_t&));
 #elif defined(APM32F4XX)
-  void register_rx_message(CAN_FilterConfig_T& filter,
+  void register_rx_message(ucan::filter_config filter,
                            std::chrono::milliseconds timeout,
                            void (*handler)(const canpayload_t&));
 #endif
