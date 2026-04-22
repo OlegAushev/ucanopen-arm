@@ -3,7 +3,7 @@
 #include <ucanopen-arm/f4/server/impl/impl_server.hpp>
 
 #include <emb/algorithm.hpp>
-#include <emb/queue.hpp>
+#include <emb/inplace_queue.hpp>
 
 namespace ucanopen {
 
@@ -12,11 +12,11 @@ private:
   impl::Server& server_;
 
   ucan::rxmessage_attr rsdo_rxattr_;
-  emb::queue<canpayload_t, 16> rsdo_queue_;
+  emb::inplace_queue<canpayload_t, 16> rsdo_queue_;
 
   canid_t tsdo_id_;
   static constexpr uint8_t tsdo_len_ = cob_sizes[std::to_underlying(Cob::tsdo)];
-  emb::queue<canpayload_t, 16> tsdo_queue_;
+  emb::inplace_queue<canpayload_t, 16> tsdo_queue_;
 public:
   SdoService(impl::Server& server);
   virtual std::vector<ucan::rxmessage_attr> get_rx_attr() const override;
